@@ -71,7 +71,7 @@ const Navbar = () => {
 
     {
       name: "Manage Events",
-      href: "/events/manage",
+      href: "/manage-events",
       icon: <FaUserCog />,
     },
   ];

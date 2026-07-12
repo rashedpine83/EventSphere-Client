@@ -3,7 +3,7 @@ import { getEvents } from "@/lib/api-actions/events";
 import EventContainer from "@/components/events/EventContainer";
 
 const EventsPage = async () => {
-  const events = await getEvents();
+  const { events } = await getEvents();
 
   return (
     <section className="min-h-screen bg-[#0B1120] py-16">
@@ -24,8 +24,7 @@ const EventsPage = async () => {
             and many more events happening around you.
           </p>
         </div>
-
-        <EventContainer events={events} />
+        <EventContainer events={events} />;
       </div>
     </section>
   );
