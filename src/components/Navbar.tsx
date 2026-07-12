@@ -65,7 +65,7 @@ const Navbar = () => {
   const privateLinks = [
     {
       name: "Add Event",
-      href: "/events/add",
+      href: "/add-event",
       icon: <FaPlusCircle />,
     },
 
