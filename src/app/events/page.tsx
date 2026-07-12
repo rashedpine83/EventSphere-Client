@@ -9,13 +9,19 @@ const EventsPage = async () => {
     <section className="min-h-screen bg-[#0B1120] py-16">
       <div className="mx-auto max-w-7xl px-5">
         {/* Hero */}
-        <div className="mb-14 text-center">
-          <h1 className="text-4xl font-bold text-white md:text-5xl">
-            Explore Events
+        <div className="mb-16 rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-8 py-16 text-center">
+          <span className="rounded-full bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-400">
+            Explore Amazing Events
+          </span>
+
+          <h1 className="mt-6 text-5xl font-bold text-white">
+            Find Your
+            <span className="text-emerald-400"> Next Event</span>
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-slate-400">
-            Discover conferences, workshops, concerts and more.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+            Browse conferences, workshops, sports, music festivals, hackathons
+            and many more events happening around you.
           </p>
         </div>
 

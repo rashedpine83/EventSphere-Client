@@ -11,7 +11,21 @@ interface Props {
 
 const EventCard = ({ event }: Props) => {
   return (
-    <div className="group overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 transition duration-300 hover:-translate-y-2 hover:border-emerald-500 hover:shadow-2xl hover:shadow-emerald-500/10">
+    <div
+      className="
+group
+overflow-hidden
+rounded-3xl
+border
+border-slate-800
+bg-slate-900
+transition-all
+duration-500
+hover:-translate-y-2
+hover:border-emerald-500
+hover:shadow-[0_20px_50px_rgba(16,185,129,0.18)]
+"
+    >
       {/* Image */}
       <div className="relative h-56 overflow-hidden">
         <Image
@@ -83,9 +97,21 @@ const EventCard = ({ event }: Props) => {
         {/* Button */}
         <Link
           href={`/events/${event._id}`}
-          className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 py-3 font-semibold text-white transition hover:bg-emerald-600"
+          className="
+    mt-6
+    flex
+    items-center
+    justify-center
+    rounded-xl
+    bg-emerald-500
+    py-3
+    font-semibold
+    text-white
+    transition
+    hover:bg-emerald-600
+  "
         >
-          View Details
+          View Details →
         </Link>
       </div>
     </div>

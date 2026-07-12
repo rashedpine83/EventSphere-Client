@@ -8,11 +8,11 @@ interface Props {
 const EventGrid = ({ events }: Props) => {
   if (events.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-700 py-20 text-center">
-        <h2 className="text-3xl font-bold text-white">No Events Found</h2>
+      <div className="rounded-3xl border border-dashed border-slate-700 py-24 text-center">
+        <h2 className="text-4xl font-bold text-white">No Events Found</h2>
 
-        <p className="mt-3 text-slate-400">
-          Try another search or choose a different category.
+        <p className="mt-4 text-slate-400">
+          Try searching with another keyword or change the category.
         </p>
       </div>
     );

@@ -11,6 +11,7 @@ interface Props {
 const EventContainer = ({ events }: Props) => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [sortBy, setSortBy] = useState("newest");
 
   const categories = [
     "All",
@@ -18,7 +19,7 @@ const EventContainer = ({ events }: Props) => {
   ];
 
   const filteredEvents = useMemo(() => {
-    return events.filter((event) => {
+    const filtered = events.filter((event) => {
       const matchSearch =
         event.title.toLowerCase().includes(search.toLowerCase()) ||
         event.location.toLowerCase().includes(search.toLowerCase());
@@ -27,11 +28,42 @@ const EventContainer = ({ events }: Props) => {
 
       return matchSearch && matchCategory;
     });
-  }, [events, search, category]);
+
+    filtered.sort((a, b) => {
+      if (sortBy === "newest") {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      }
+
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    });
+
+    return filtered;
+  }, [events, search, category, sortBy]);
 
   return (
     <>
       {/* Search & Filter */}
+      <div className="mb-8 flex items-center justify-between">
+        <p className="text-slate-400">
+          Showing{" "}
+          <span className="font-semibold text-emerald-400">
+            {filteredEvents.length}
+          </span>{" "}
+          event{filteredEvents.length !== 1 && "s"}
+        </p>
+
+        <p className="text-sm text-slate-500">Total Events: {events.length}</p>
+      </div>
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none focus:border-emerald-500"
+      >
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
       <div className="mb-10 flex flex-col gap-4 md:flex-row">
         <input
           type="text"
