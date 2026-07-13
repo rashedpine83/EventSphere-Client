@@ -11,6 +11,10 @@ export interface EventData {
   endTime: string;
   attendeeLimit: number;
   image: string;
+
+  // NEW
+  isPaid: boolean;
+  ticketPrice: number;
 }
 
 export interface CreateEventResponse {
@@ -26,6 +30,30 @@ export interface EventResponse extends CreateEventResponse {
 export interface EventsResponse extends CreateEventResponse {
   events: Event[];
 }
+
+export interface JoinEventResponse {
+  success: boolean;
+  message: string;
+  result?: {
+    modifiedCount: number;
+  };
+}
+
+export const joinEvent = async (
+  id: string,
+  token: string,
+): Promise<JoinEventResponse> => {
+  return await serverMutation(
+    `/api/events/${id}/join`,
+    undefined,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    "PATCH",
+  );
+};
 
 export const createEvent = async (
   eventData: EventData,

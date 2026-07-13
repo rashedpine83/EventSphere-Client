@@ -66,6 +66,9 @@ hover:shadow-[0_20px_50px_rgba(16,185,129,0.18)]
             <FaLocationDot className="text-emerald-400" />
             <span>{event.location}</span>
           </div>
+          <div className="rounded-full bg-emerald-500/10 px-4 py-2 text-emerald-400 font-semibold">
+            {event.isPaid ? `৳ ${event.ticketPrice}` : "FREE"}
+          </div>
 
           <div className="flex items-center gap-3">
             <FaClock className="text-emerald-400" />

@@ -281,7 +281,7 @@ const ManageEventsPage = () => {
     justify-center
     gap-2
     rounded-xl
-    bg-amber-500
+    bg-green-500
     px-4
     py-3
     font-semibold
@@ -289,7 +289,7 @@ const ManageEventsPage = () => {
     transition-all
     duration-300
     hover:scale-105
-    hover:bg-amber-600"
+    hover:bg-green-700"
                   >
                     <FaPenToSquare />
                     <span className="hidden sm:inline">Edit</span>

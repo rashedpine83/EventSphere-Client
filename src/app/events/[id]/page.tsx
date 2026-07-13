@@ -1,3 +1,4 @@
+import JoinButton from "@/components/events/JoinButton";
 import { getSingleEvent } from "@/lib/api-actions/events";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,6 +23,13 @@ const EventDetailsPage = async ({ params }: Props) => {
 
   const { event } = await getSingleEvent(id);
 
+  const joinedCount = event.joinedUsers?.length ?? 0;
+
+  const remainingSeats = event.attendeeLimit - joinedCount;
+
+  const isEventExpired =
+    new Date(`${event.eventDate}T${event.endTime}`) < new Date();
+
   return (
     <section className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-14">
       <div className="container mx-auto px-4">
@@ -29,16 +37,17 @@ const EventDetailsPage = async ({ params }: Props) => {
           <div className="grid lg:grid-cols-2 min-h-[88vh]">
             {/* ================= IMAGE ================= */}
 
-            <div className="relative h-[420px] lg:h-full overflow-hidden">
+            <div className="relative flex h-[500px] items-center justify-center overflow-hidden rounded-l-[32px] bg-slate-950 p-6">
               <Image
                 src={event.image}
                 alt={event.title}
-                fill
+                width={900}
+                height={600}
                 priority
-                className="object-cover transition duration-700 hover:scale-110"
+                className="max-h-full w-auto rounded-2xl object-contain transition duration-500 hover:scale-105"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
 
               {/* Category */}
 
@@ -118,8 +127,8 @@ const EventDetailsPage = async ({ params }: Props) => {
 
                   <InfoCard
                     icon={<FaUsers />}
-                    title="Attendee Limit"
-                    value={`${event.attendeeLimit} Attendees`}
+                    title="Available Seats"
+                    value={`${remainingSeats} / ${event.attendeeLimit}`}
                     iconBg="bg-yellow-500/10"
                     iconColor="text-yellow-400"
                   />
@@ -186,6 +195,13 @@ const EventDetailsPage = async ({ params }: Props) => {
                     </div>
                   </div>
                 </div>
+                <div className="rounded-2xl border border-slate-700 bg-slate-900 p-5">
+                  <p className="text-slate-400">Ticket</p>
+
+                  <h2 className="mt-2 text-3xl font-bold">
+                    {event.isPaid ? `৳ ${event.ticketPrice}` : "FREE"}
+                  </h2>
+                </div>
 
                 {/* ================= ABOUT EVENT ================= */}
 
@@ -226,33 +242,14 @@ const EventDetailsPage = async ({ params }: Props) => {
                     Back to Events
                   </Link>
 
-                  <button
-                    className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  rounded-xl
-                  bg-gradient-to-r
-                  from-emerald-500
-                  via-teal-500
-                  to-cyan-500
-                  px-10
-                  py-4
-                  font-bold
-                  text-white
-                  shadow-xl
-                  shadow-emerald-500/30
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:scale-105
-                  hover:from-emerald-400
-                  hover:to-cyan-400
-                  hover:shadow-2xl
-                  hover:shadow-cyan-500/30"
-                  >
-                    Join Event
-                  </button>
+                  <JoinButton
+                    eventId={event._id}
+                    organizerEmail={event.organizerEmail}
+                    attendeeLimit={event.attendeeLimit}
+                    joinedUsers={event.joinedUsers}
+                    eventDate={event.eventDate}
+                    endTime={event.endTime}
+                  />
                 </div>
               </div>
             </div>
