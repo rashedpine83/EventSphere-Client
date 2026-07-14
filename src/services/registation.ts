@@ -7,7 +7,8 @@ export interface RegistrationData {
 export interface RegisterEventResponse {
   success: boolean;
   message: string;
-  insertedId?: string;
-  isPaid?: boolean;
-  remainingSeats?: number;
+
+  insertedId: string;
+
+  isPaid: boolean;
 }

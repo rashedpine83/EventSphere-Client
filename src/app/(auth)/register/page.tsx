@@ -17,34 +17,28 @@ import toast from "react-hot-toast";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { createUser } from "@/lib/api-actions/userApi";
 
 const RegisterPage = () => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
-
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const [name, setName] = useState("");
-
   const [email, setEmail] = useState("");
-
   const [photo, setPhoto] = useState("");
   const [imageError, setImageError] = useState(false);
-
   const [password, setPassword] = useState("");
-
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState<"attendee" | "organizer">("attendee");
 
   const validatePassword = (password: string) => {
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
-
     return regex.test(password);
   };
 
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name.trim()) {
@@ -74,26 +68,33 @@ const RegisterPage = () => {
 
       const { error } = await signUp.email({
         name,
-
         email,
-
         password,
-
         image: photo,
-
         callbackURL: "/",
       });
 
       if (error) {
-        toast.error("Something went wrong. Please try again.");
-
+        toast.error(error.message || "Registration failed.");
         return;
       }
+
+      console.log("Selected Role:", role);
+
+      // Save user in MongoDB
+      await createUser({
+        name,
+        email,
+        image: photo,
+        role,
+      });
 
       toast.success("Registration Successful 🎉");
 
       router.push("/");
-    } catch {
+    } catch (error) {
+      console.error(error);
+
       toast.error("Something went wrong.");
     } finally {
       setLoading(false);
@@ -380,6 +381,67 @@ const RegisterPage = () => {
               >
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+
+              {/* Role */}
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-slate-500">
+                  Select Account Type
+                </label>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setRole("attendee")}
+                    className={`rounded-2xl border p-5 transition-all duration-300 ${
+                      role === "attendee"
+                        ? "border-emerald-500 bg-slate-900 "
+                        : "border-slate-700 bg-emerald-500/10 hover:border-slate-500"
+                    }`}
+                  >
+                    <FaUser
+                      className={`mx-auto mb-3 text-3xl ${
+                        role === "attendee"
+                          ? "text-emerald-400"
+                          : "text-slate-400"
+                      }`}
+                    />
+
+                    <h3 className="text-lg font-semibold text-green-500">
+                      Attendee
+                    </h3>
+
+                    <p className="mt-2 text-sm text-slate-600">
+                      Join events and download tickets.
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setRole("organizer")}
+                    className={`rounded-2xl border p-5 transition-all duration-300 ${
+                      role === "organizer"
+                        ? "border-emerald-500 bg-slate-900 "
+                        : "border-slate-700 bg-emerald-500/10 hover:border-slate-500"
+                    }`}
+                  >
+                    <FaCalendarAlt
+                      className={`mx-auto mb-3 text-3xl ${
+                        role === "organizer"
+                          ? "text-blue-400"
+                          : "text-slate-400"
+                      }`}
+                    />
+
+                    <h3 className="text-lg font-semibold text-green-500">
+                      Organizer
+                    </h3>
+
+                    <p className="mt-2 text-sm text-slate-600">
+                      Create and manage your own events.
+                    </p>
+                  </button>
+                </div>
+              </div>
 
               <button
                 type="submit"

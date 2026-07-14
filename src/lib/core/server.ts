@@ -1,7 +1,7 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 if (!baseUrl) {
-  throw new Error("NEXT_PUBLIC_BASE_URL is missing");
+  throw new Error("NEXT_PUBLIC_API_URL is missing");
 }
 
 export const serverMutation = async <T>(

@@ -105,8 +105,17 @@ export const deleteEvent = async (
 
 // get all events
 
-export const getEvents = async (): Promise<EventsResponse> => {
-  return await serverFetch<EventsResponse>("/api/events");
+// export const getEvents = async (): Promise<EventsResponse> => {
+//   return await serverFetch<EventsResponse>("/api/events");
+// };
+
+export const getEvents = async (
+  page = 1,
+  limit = 12,
+): Promise<EventsResponse> => {
+  return await serverFetch<EventsResponse>(
+    `/api/events?page=${page}&limit=${limit}`,
+  );
 };
 
 // get single event by id
@@ -122,16 +131,3 @@ export const getMyEvents = async (token: string): Promise<EventsResponse> => {
     },
   });
 };
-
-// export const createEvent = async (eventData: EventData, token: string) => {
-//   return await serverMutation<CreateEventResponse>(
-//     "/api/events",
-//     eventData,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//     "POST",
-//   );
-// };

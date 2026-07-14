@@ -7,6 +7,7 @@ import { FaCheck, FaSpinner } from "react-icons/fa6";
 import { authClient } from "@/lib/auth-client";
 import { registerEvent } from "@/lib/api-actions/registationApi";
 import RegistrationModal from "../registation/RegistrationModal";
+import { createCheckoutSession } from "@/lib/api-actions/paymentApi";
 
 interface JoinButtonProps {
   eventId: string;
@@ -111,21 +112,33 @@ const JoinButton = ({
         return;
       }
 
-      toast.success(res.message);
-
       setIsOpen(false);
+
+      // Paid Event
+      if (res.isPaid) {
+        toast.success("Registration successful. Redirecting to payment...");
+
+        const checkout = await createCheckoutSession(
+          res.insertedId,
+          data.token,
+        );
+
+        if (!checkout.success) {
+          toast.error(checkout.message);
+          return;
+        }
+
+        window.location.href = checkout.checkoutUrl;
+
+        return;
+      }
+
+      // Free Event
+      toast.success("Registration successful.");
 
       router.refresh();
 
-      if (res.isPaid) {
-        toast.success("Registration successful. Please complete payment.");
-
-        router.push(`/payment/${res.insertedId}`);
-      } else {
-        toast.success("Registration successful.");
-
-        router.push(`/ticket/${res.insertedId}`);
-      }
+      router.push(`/ticket/${res.insertedId}`);
     } catch (error) {
       console.error(error);
       toast.error("Registration failed.");

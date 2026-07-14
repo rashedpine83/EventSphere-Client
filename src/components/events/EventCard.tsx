@@ -42,12 +42,8 @@ hover:shadow-[0_20px_50px_rgba(16,185,129,0.18)]
 
         {/* Date */}
         <div className="absolute right-4 top-4 rounded-xl bg-black/70 px-3 py-2 text-center backdrop-blur">
-          <p className="text-xl font-bold text-white">
-            {format(new Date(event.eventDate), "dd")}
-          </p>
-
-          <p className="text-xs uppercase text-slate-300">
-            {format(new Date(event.eventDate), "MMM")}
+          <p className="text-lg uppercase text-slate-300">
+            {format(new Date(event.eventDate), "dd MMM yyyy")}
           </p>
         </div>
       </div>
