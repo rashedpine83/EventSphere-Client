@@ -22,23 +22,38 @@ export interface JoinedUser {
 
 export interface Event {
   _id: string;
+
   title: string;
+
   description: string;
+
   category: string;
+
   location: string;
+
   eventDate: string;
+
   startTime: string;
+
   endTime: string;
+
   attendeeLimit: number;
+
   image: string;
 
-  // NEW
-  isPaid: boolean;
-  ticketPrice: number;
-
   organizerName: string;
+
   organizerEmail: string;
+
   createdAt: string;
 
-  joinedUsers?: JoinedUser[];
+  isPaid: boolean;
+
+  ticketPrice: number;
+
+  registeredCount: number;
+
+  remainingSeats: number;
+
+  alreadyRegistered: boolean;
 }

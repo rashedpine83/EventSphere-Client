@@ -245,10 +245,15 @@ const EventDetailsPage = async ({ params }: Props) => {
                   <JoinButton
                     eventId={event._id}
                     organizerEmail={event.organizerEmail}
-                    attendeeLimit={event.attendeeLimit}
-                    joinedUsers={event.joinedUsers}
+                    eventTitle={event.title}
+                    category={event.category}
+                    location={event.location}
+                    organizerName={event.organizerName}
                     eventDate={event.eventDate}
+                    startTime={event.startTime}
                     endTime={event.endTime}
+                    remainingSeats={event.remainingSeats}
+                    alreadyRegistered={event.alreadyRegistered}
                   />
                 </div>
               </div>
