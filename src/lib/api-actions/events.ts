@@ -28,8 +28,15 @@ export interface EventResponse extends CreateEventResponse {
   event: Event;
 }
 
-export interface EventsResponse extends CreateEventResponse {
+export interface EventsResponse {
+  success: boolean;
+  message?: string;
+
   events: Event[];
+
+  page: number;
+  totalPages: number;
+  totalCount: number;
 }
 
 export interface JoinEventResponse {

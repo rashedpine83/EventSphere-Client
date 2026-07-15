@@ -27,7 +27,6 @@ export const serverFetch = async <T>(
   options: RequestInit = {},
 ): Promise<T> => {
   const res = await fetch(`${baseUrl}${path}`, options);
-  console.log(`${baseUrl}${path}`);
 
   if (!res.ok) {
     throw new Error(`Request failed with status ${res.status}`);

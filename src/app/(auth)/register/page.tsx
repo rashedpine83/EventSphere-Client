@@ -79,8 +79,6 @@ const RegisterPage = () => {
         return;
       }
 
-      console.log("Selected Role:", role);
-
       // Save user in MongoDB
       await createUser({
         name,

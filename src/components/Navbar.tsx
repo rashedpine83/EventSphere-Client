@@ -34,9 +34,6 @@ const Navbar = () => {
 
   const role = dbUser?.role;
 
-  console.log(dbUser);
-  console.log(role);
-
   useEffect(() => {
     if (!email) return;
 

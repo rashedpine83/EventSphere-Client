@@ -23,6 +23,12 @@ export interface Event {
   registeredCount: number;
   remainingSeats: number;
   alreadyRegistered: boolean;
+  // Add this
+  joinedUsers?: {
+    userId: string;
+    email: string;
+    joinedAt: string;
+  }[];
 }
 
 export interface AdminEvent {
