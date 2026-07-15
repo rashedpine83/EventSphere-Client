@@ -2,7 +2,7 @@ import { Event } from "@/services/event";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaRegHeart } from "react-icons/fa";
 import { FaClock, FaLocationDot, FaUser, FaUsers } from "react-icons/fa6";
 
 interface Props {
@@ -93,25 +93,52 @@ hover:shadow-[0_20px_50px_rgba(16,185,129,0.18)]
           </div>
         </div>
 
-        {/* Button */}
-        <Link
-          href={`/events/${event._id}`}
-          className="
-    mt-6
-    flex
-    items-center
-    justify-center
-    rounded-xl
-    bg-emerald-500
-    py-3
-    font-semibold
-    text-white
-    transition
-    hover:bg-emerald-600
-  "
-        >
-          View Details →
-        </Link>
+        {/* Buttons */}
+
+        <div className="mt-6 flex gap-3">
+          <Link
+            href={`/events/${event._id}`}
+            className="
+      flex-1
+      rounded-xl
+      bg-emerald-500
+      py-3
+      text-center
+      font-semibold
+      text-white
+      transition
+      hover:bg-emerald-600
+    "
+          >
+            View Details →
+          </Link>
+
+          <button
+            type="button"
+            className="
+      flex
+      items-center
+      justify-center
+      gap-2
+      rounded-xl
+      border
+      border-slate-700
+      bg-slate-900
+      px-5
+      py-3
+      font-semibold
+      text-white
+      transition-all
+      duration-300
+      hover:border-rose-500
+      hover:bg-rose-500/10
+      hover:text-rose-400
+    "
+          >
+            <FaRegHeart className="text-lg" />
+            Wishlist
+          </button>
+        </div>
       </div>
     </div>
   );
