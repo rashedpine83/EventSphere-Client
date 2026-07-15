@@ -121,12 +121,12 @@ const Navbar = () => {
     },
     {
       name: "Manage Users",
-      href: "/manage-users",
+      href: "/admin/manage-users",
       icon: <FaUsers />,
     },
     {
       name: "Manage Events",
-      href: "/manage-all-events",
+      href: "/admin/manage-events",
       icon: <FaClipboardList />,
     },
   ];

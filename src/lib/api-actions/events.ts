@@ -1,5 +1,6 @@
-import { Event } from "@/services/event";
+import { AdminEventsResponse, Event } from "@/services/event";
 import { serverFetch, serverMutation } from "../core/server";
+import { clientFetch } from "../core/client";
 
 export interface EventData {
   title: string;
@@ -129,5 +130,31 @@ export const getMyEvents = async (token: string): Promise<EventsResponse> => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+  });
+};
+
+export const getAdminEvents = async (
+  page = 1,
+  limit = 10,
+  search = "",
+  category = "All",
+): Promise<AdminEventsResponse> => {
+  return await serverFetch(
+    `/api/admin/events?page=${page}&limit=${limit}&search=${search}&category=${category}`,
+  );
+};
+
+export const adminDeleteEvent = async (id: string) => {
+  return await clientFetch(`/api/admin/events/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const updateEventStatus = async (id: string, status: string) => {
+  return await clientFetch(`/api/admin/events/${id}/status`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      status,
+    }),
   });
 };
