@@ -42,7 +42,7 @@ export default function Loading() {
         text-transparent
         "
       >
-        Loading SkillSwap...
+        Loading EventSphere...
       </h2>
 
       <p className="text-sm text-gray-400 mt-2">Please wait a moment</p>

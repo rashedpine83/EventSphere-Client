@@ -4,12 +4,63 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { FaCalendarAlt, FaRegHeart } from "react-icons/fa";
 import { FaClock, FaLocationDot, FaUser, FaUsers } from "react-icons/fa6";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useSession } from "@/lib/auth-client";
+import { addWishlist } from "@/lib/api-actions/wishlistApi";
 
 interface Props {
   event: Event;
 }
 
 const EventCard = ({ event }: Props) => {
+  const router = useRouter();
+
+  const { data: session } = useSession();
+
+  const [saved, setSaved] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const handleWishlist = async () => {
+    if (!session?.user?.email) {
+      toast.error("Please login first.");
+
+      router.push("/login");
+
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await addWishlist({
+        eventId: event._id,
+        eventTitle: event.title,
+        eventCategory: event.category,
+        eventImage: event.image,
+        eventDate: event.eventDate,
+        location: event.location,
+        isPaid: event.isPaid,
+        ticketPrice: event.ticketPrice,
+        organizerName: event.organizerName,
+        organizerEmail: event.organizerEmail,
+        userEmail: session.user.email,
+      });
+
+      setSaved(true);
+
+      toast.success("Added to Wishlist ❤️");
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Failed to add wishlist.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       className="
@@ -115,28 +166,33 @@ hover:shadow-[0_20px_50px_rgba(16,185,129,0.18)]
 
           <button
             type="button"
+            onClick={handleWishlist}
+            disabled={loading || saved}
             className="
-      flex
-      items-center
-      justify-center
-      gap-2
-      rounded-xl
-      border
-      border-slate-700
-      bg-slate-900
-      px-5
-      py-3
-      font-semibold
-      text-white
-      transition-all
-      duration-300
-      hover:border-rose-500
-      hover:bg-rose-500/10
-      hover:text-rose-400
-    "
+    flex
+    items-center
+    justify-center
+    gap-2
+    rounded-xl
+    border
+    border-slate-700
+    bg-slate-900
+    px-5
+    py-3
+    font-semibold
+    text-white
+    transition-all
+    duration-300
+    hover:border-rose-500
+    hover:bg-rose-500/10
+    hover:text-rose-400
+    disabled:cursor-not-allowed
+    disabled:opacity-70
+  "
           >
             <FaRegHeart className="text-lg" />
-            Wishlist
+
+            {loading ? "Saving..." : saved ? "❤️ Saved" : "Wishlist"}
           </button>
         </div>
       </div>
