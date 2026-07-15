@@ -1,8 +1,10 @@
 import { getUserSession } from "@/lib/core/session";
 import { getMyWishlist } from "@/lib/api-actions/wishlistApi";
 import WishlistContainer from "@/components/wishlist/WishlistContainer";
+import { requireRole } from "@/lib/core/requireRole";
 
 const MyWishlistPage = async () => {
+  await requireRole(["attendee"]);
   const user = await getUserSession();
 
   if (!user?.email) {

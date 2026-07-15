@@ -1,9 +1,16 @@
-import Hero from "@/components/Hero";
+import Hero from "@/components/hero/Hero";
+import { getDashboardStats } from "@/lib/api-actions/dashboardApi";
+import { getEvents } from "@/lib/api-actions/events";
+export default async function HomePage() {
+  const { stats } = await getDashboardStats();
 
-export default function Home() {
+  const { events } = await getEvents(1, 5);
+
   return (
-    <main>
-      <Hero />
-    </main>
+    <>
+      <Hero stats={stats} events={events} />
+
+      {/* Other Sections */}
+    </>
   );
 }

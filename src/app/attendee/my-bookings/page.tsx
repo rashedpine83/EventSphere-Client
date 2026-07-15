@@ -1,8 +1,10 @@
 import BookingContainer from "@/components/bookings/BookingContainer";
 import { getMyBookings } from "@/lib/api-actions/bookingApi";
+import { requireRole } from "@/lib/core/requireRole";
 import { getUserSession } from "@/lib/core/session";
 
 const MyBookingsPage = async () => {
+  await requireRole(["attendee"]);
   const user = await getUserSession();
 
   if (!user?.email) {

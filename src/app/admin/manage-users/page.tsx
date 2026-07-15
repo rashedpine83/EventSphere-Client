@@ -1,5 +1,6 @@
 import ManageUsersContainer from "@/components/manage-users/ManageUsersContainer";
 import { getUsers } from "@/lib/api-actions/userApi";
+import { requireRole } from "@/lib/core/requireRole";
 
 interface Props {
   searchParams: Promise<{
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const ManageUsersPage = async ({ searchParams }: Props) => {
+  await requireRole(["admin"]);
   const params = await searchParams;
 
   const page = Number(params.page || 1);

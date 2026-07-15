@@ -1,5 +1,6 @@
 import ManageEventsContainer from "@/components/manage-events/ManageEventsContainer";
 import { getAdminEvents } from "@/lib/api-actions/events";
+import { requireRole } from "@/lib/core/requireRole";
 
 interface Props {
   searchParams: Promise<{
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const ManageAllEventsPage = async ({ searchParams }: Props) => {
+  await requireRole(["admin"]);
   const params = await searchParams;
 
   const page = Number(params.page || 1);

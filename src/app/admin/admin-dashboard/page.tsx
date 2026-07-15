@@ -3,8 +3,10 @@ import DashboardCharts from "@/components/dashboard/DashboardChart";
 import LatestEventsTable from "@/components/dashboard/DashboardTable";
 import LatestUsersTable from "@/components/dashboard/LatestUserTable";
 import { getDashboardData } from "@/lib/api-actions/dashboardApi";
+import { requireRole } from "@/lib/core/requireRole";
 
 const AdminDashboardPage = async () => {
+  await requireRole(["admin"]);
   const dashboard = await getDashboardData();
 
   return (
