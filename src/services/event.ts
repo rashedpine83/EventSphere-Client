@@ -23,6 +23,8 @@ export interface Event {
   registeredCount: number;
   remainingSeats: number;
   alreadyRegistered: boolean;
+  totalRevenue: number;
+  totalBookings: number;
   // Add this
   joinedUsers?: {
     userId: string;

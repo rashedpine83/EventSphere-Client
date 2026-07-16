@@ -1,5 +1,5 @@
 import ContactCTA from "@/components/contact/ContactCTA";
-// import ContactFAQ from "@/components/contact/ContactFAQ";
+import ContactFAQ from "@/components/contact/ContactFAQ";
 import ContactFeatures from "@/components/contact/ContactFeatures";
 import ContactForm from "@/components/contact/ContactForm";
 import ContactHero from "@/components/contact/ContactHero";
@@ -18,7 +18,7 @@ export default function ContactPage() {
       <ContactInfo />
       <ContactForm />
       <ContactFeatures />
-      {/* <ContactFAQ /> */}
+      <ContactFAQ />
       <ContactCTA />
     </>
   );

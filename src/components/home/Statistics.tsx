@@ -31,7 +31,7 @@ const items = [
   },
   {
     title: "Registrations",
-    valueKey: "totalRegistrations",
+    valueKey: "totalBookings",
     icon: FaTicket,
     suffix: "+",
   },

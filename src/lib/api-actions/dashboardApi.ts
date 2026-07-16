@@ -24,11 +24,9 @@ export interface DashboardStats {
   totalUsers: number;
   totalEvents: number;
   totalBookings: number;
-
   totalWishlist: number;
   totalOrganizers: number;
   totalAttendees: number;
-
   totalRevenue: number;
 }
 

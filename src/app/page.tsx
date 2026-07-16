@@ -1,5 +1,4 @@
 import Hero from "@/components/hero/Hero";
-// import Categories from "@/components/home/Categories";
 import CTA from "@/components/home/CTA";
 import FAQ from "@/components/home/FAQ";
 import FeaturedEvents from "@/components/home/FeaturedEvents";
@@ -19,7 +18,6 @@ export default async function HomePage() {
     <>
       <Hero stats={stats} events={events} />
       <Features />
-      {/* <Categories /> */}
       <FeaturedEvents />
       <WhyChoose />
       <Statistics stats={stats} />
