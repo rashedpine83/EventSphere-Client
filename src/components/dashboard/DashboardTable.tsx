@@ -1,9 +1,10 @@
-import { DashboardEvent } from "@/services/dashboard";
+// import { DashboardEvent } from "@/services/dashboard";
+import { Event } from "@/services/event";
 import { format } from "date-fns";
 import Link from "next/link";
 
 interface Props {
-  events: DashboardEvent[];
+  events: Event[];
 }
 
 const LatestEventsTable = ({ events }: Props) => {

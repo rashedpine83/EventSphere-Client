@@ -1,7 +1,9 @@
-import { DashboardUser } from "@/services/dashboard";
+// import { DashboardUser } from "@/services/dashboard";
+
+import { DbUser } from "@/lib/api-actions/userApi";
 
 interface Props {
-  users: DashboardUser[];
+  users: DbUser[];
 }
 
 const LatestUsersTable = ({ users }: Props) => {

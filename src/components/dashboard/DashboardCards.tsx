@@ -15,7 +15,7 @@ interface Props {
     totalWishlist: number;
     totalOrganizers: number;
     totalAttendees: number;
-    revenue: number;
+    totalRevenue: number;
   };
 }
 
@@ -58,7 +58,7 @@ const DashboardCards = ({ stats }: Props) => {
 
     {
       title: "Revenue",
-      value: `৳${stats.revenue.toLocaleString()}`,
+      value: `৳${stats.totalRevenue.toLocaleString()}`,
       icon: FaMoneyBillWave,
       color: "from-yellow-500 to-amber-600",
     },

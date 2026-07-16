@@ -34,3 +34,29 @@ export const serverFetch = async <T>(
 
   return res.json();
 };
+
+// export const serverFetch = async <T>(
+//   path: string,
+//   options: RequestInit = {},
+// ): Promise<T> => {
+//   const url = `${baseUrl}${path}`;
+
+//   console.log("BASE URL:", baseUrl);
+//   console.log("REQUEST:", url);
+
+//   const res = await fetch(url, options);
+
+//   console.log("STATUS:", res.status);
+
+//   if (!res.ok) {
+//     const body = await res.text();
+
+//     throw new Error(`
+// Request URL: ${url}
+// Status: ${res.status}
+// Response: ${body}
+// `);
+//   }
+
+//   return res.json();
+// };

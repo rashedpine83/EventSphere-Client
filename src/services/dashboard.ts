@@ -1,18 +1,20 @@
-export interface DashboardEvent {
-  _id: string;
-  title: string;
-  category: string;
-  organizerName: string;
-  eventDate: string;
-  createdAt: string;
-}
+// export interface DashboardEvent {
+//   _id: string;
+//   title: string;
+//   category: string;
+//   organizerName: string;
+//   eventDate: string;
+//   createdAt: string;
+// }
+
+import { Event } from "./event";
 
 export interface DashboardUser {
   _id: string;
   name: string;
   email: string;
   role: string;
-  createdAt: string;
+  // createdAt: string;
 }
 
 export interface DashboardResponse {
@@ -33,7 +35,7 @@ export interface DashboardResponse {
     count: number;
   }[];
 
-  latestEvents: DashboardEvent[];
+  latestEvents: Event[];
 
   latestUsers: DashboardUser[];
 }
